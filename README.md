@@ -1,6 +1,7 @@
-# Run automatically
-node updateEnv.js - Answer the questions to update the .env file
-node runDockerApp.js - Add the images after updating the .env file
+# Run automatically in the command line/ terminal
+
+node updateEnv.js - This will add a new .env file from the .env.example
+node runDockerApp.js - This will run the docker image with all the containers.
 
 # Stop manually
 
@@ -32,10 +33,6 @@ docker-compose --project-name project_env -f docker-compose-laravel.yml run --rm
 
 docker-compose --project-name project_env -f docker-compose-laravel.yml run --rm phpunit ----
 
-# JEST Test - Frontend
-
-docker-compose --project-name project_env -f docker-compose-frontend.yml run --rm jest ----
-
 # Restart docker
 
 sudo service docker restart
@@ -44,7 +41,7 @@ sudo service docker restart
 
 docker system prune --all --volumes -f
 
-# Get the log information about a container/image
+# Get the log information about a container/image - You can also use the docker desktop.
 
 docker logs <id>
 
