@@ -4,7 +4,7 @@ namespace {{ namespace }};
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\DatabaseTablesTestCase;
+use Tests\DatabaseTableTestCase;
 
 class {{ class }}DatabaseTableTest extends DatabaseTablesTestCase
 {

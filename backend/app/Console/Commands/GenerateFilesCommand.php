@@ -25,7 +25,7 @@ class GenerateFilesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Generate sweaty mama files for development.';
+    protected $description = 'Generate files for development.';
 
     /**
      * Execute the console command.

@@ -19,7 +19,7 @@ class UpdateDatabaseSeederCommand extends Command
      *
      * @var string
      */
-    protected $description = 'This will update the DatabaseSeeder.php with any new seeders created.';
+    protected $description = 'Update the DatabaseSeeder.php with any new seeders created.';
 
     /**
      * Execute the console command.

@@ -18,7 +18,7 @@ class GenerateDatabaseTestCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate a new database test';
 
     /**
      * The type of class being generated.
