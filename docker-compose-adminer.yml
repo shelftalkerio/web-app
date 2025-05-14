@@ -1,0 +1,13 @@
+services:
+  adminer:
+    image: adminer
+    container_name: adminer_${SITE}
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:8080
+    networks:
+      - app
+
+networks:
+  app:
+  

@@ -1,0 +1,14 @@
+services:
+  playwright:
+    build: ./e2e
+    container_name: playwright_${SITE}
+    volumes:
+      - ./e2e:/app
+      - /app/node_modules
+    working_dir: /app
+    entrypoint: ["npx", "playwright", "test"]
+    networks:
+      - app
+      
+networks:
+  app:

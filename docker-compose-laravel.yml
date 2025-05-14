@@ -1,0 +1,96 @@
+services:
+
+  backend:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+      args:
+          - UID=${UID}
+          - GID=${GID} 
+    container_name: backend_${SITE}
+    ports:
+      - ${BACKEND_PORT}:80
+    environment:
+      - NGINX_HOST=${SITE_URL}
+    volumes:
+      - ./backend:/var/www/html/backend
+    networks:
+      - app
+      
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php_${SITE}
+    ports:
+      - ${PHP_PORT}:9000
+    volumes:
+      - ./backend:/var/www/html/backend
+    networks:
+      - app
+      
+  redis:
+    image: redis:alpine
+    container_name: redis_${SITE}
+    restart: unless-stopped
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - ./redis:/data    
+    user: "${UID}:${GID}"  
+    networks:
+      - app
+      
+  composer:
+    profiles: ["commands"]
+    build:
+      context: ./composer
+      dockerfile: Dockerfile
+      args:
+          - UID=${UID}
+          - GID=${GID} 
+    container_name: composer_${SITE}
+    volumes:
+      - ./backend:/var/www/html/backend
+    working_dir: /var/www/html/backend
+    networks:
+      - app
+      
+  artisan:
+    profiles: ["commands"]
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: artisan_${SITE}
+    volumes:
+      - ./backend:/var/www/html/backend
+    working_dir: /var/www/html/backend
+    entrypoint: ["php", "/var/www/html/backend/artisan"]
+    networks:
+      - app
+
+  crontab:    
+    build:
+      context: ./cron
+      dockerfile: Dockerfile
+    container_name: cron_${SITE}
+    volumes:
+      - ./backend:/var/www/html/backend
+    networks:
+      - app
+
+  phpunit:
+    profiles: ["test"]
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: phpunit_${SITE}
+    volumes:
+      - ./backend:/var/www/html/backend
+    working_dir: /var/www/html/backend
+    entrypoint: "vendor/bin/phpunit"
+    networks:
+      - app
+
+networks:
+  app:

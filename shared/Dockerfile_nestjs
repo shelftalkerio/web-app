@@ -1,0 +1,24 @@
+FROM node:20-alpine as netsjs-app
+
+# update and install dependency
+RUN apk update && apk upgrade
+RUN apk add git
+
+# create destination directory
+RUN mkdir -p /var/www/html/nestjs
+WORKDIR /var/www/html/nestjs
+
+# copy package.json file to nestjs directory.
+COPY package*.json /var/www/html/nestjs/
+RUN npm install
+
+# copy the rest of the nestjs files to the nestjs directory.
+COPY ./ /var/www/html/nestjs/
+
+# expose 5000 on container
+EXPOSE 5000
+
+# Start command
+
+# Start command
+CMD ["npm", "run", "start:dev"]

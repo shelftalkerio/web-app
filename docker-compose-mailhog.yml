@@ -1,0 +1,15 @@
+services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog_${SITE}
+    restart: unless-stopped
+    volumes:
+      - ./email:/email
+    ports:
+      - ${MAIL_SERVER_1}:8025
+      - ${MAIL_SERVER_2}:1025   
+    networks:
+      - app
+
+networks:
+  app:
