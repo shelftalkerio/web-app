@@ -1,13 +1,10 @@
-// require (runCommand, readEnvFile, runInteractiveCommand, fs, path) from './commands.js'
-
 const {
   runCommand,
   readEnvFile,
-  runInteractiveCommand
+  runInteractiveCommand,
+    fs, path
 } = require('./commands.js');
 
-const fs = require('fs');
-const path = require('path');
 
 // Function to Update the .env file
 function UpdateEnvFile(UpdatedVars) {
