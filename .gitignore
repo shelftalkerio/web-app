@@ -12,21 +12,6 @@ dist
 dist-ssr
 *.local
 
-# Created directories
-backend
-nestjs
-composer
-cron
-database
-frontend
-nginx
-php
-redis
-headless
-e2e
-email
-
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
