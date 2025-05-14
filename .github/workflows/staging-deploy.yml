@@ -1,0 +1,79 @@
+name: Laravel CI/CD (Staging)
+
+on:
+  push:
+    branches: [staging]
+  pull_request:
+    branches: [staging]
+
+jobs:
+  build:
+    name: CI - Test, Lint, Build
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: laravel
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Build (for caching)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with: { path: /tmp/.build-cache, key: "${{ runner.os }}-build-${{ github.sha }}", restore-keys: "| ${{ runner.os }}-build-" }
+      - name: Build and start containers
+        run: docker-compose up -d --build
+
+      - name: Wait for MySQL
+        run: sleep 15
+
+      - name: Run Laravel tests
+        run: docker-compose exec -T app php artisan test
+
+      - name: Run PHP lint
+        run: docker-compose exec -T app ./vendor/bin/pint
+
+      - name: Build frontend (Vite)
+        run: docker-compose exec -T app npm install && docker-compose exec -T app npm run build
+
+  deploy:
+    name: Deploy to Staging
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/staging'
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_STAGING_HOST }}
+          username: ${{ secrets.SSH_STAGING_USER }}
+          key: ${{ secrets.SSH_STAGING_KEY }}
+          port: 22
+          script: |
+            cd /var/www/your-staging-project
+            git pull origin staging
+            docker-compose down
+            docker-compose up -d --build
+            docker-compose exec -T app composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker-compose exec -T app php artisan migrate --force
+            docker-compose exec -T app npm install
+            docker-compose exec -T app npm run build
+            docker-compose exec -T app php artisan config:cache
+            docker-compose exec -T app php artisan route:cache
+            docker-compose exec -T app php artisan view:cache
+            docker-compose exec -T app php artisan queue:restart
+            docker-compose exec -T app supervisorctl restart laravel-worker || true
