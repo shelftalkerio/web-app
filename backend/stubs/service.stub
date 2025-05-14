@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\{{ class }};
+
+class {{ class }}Service
+{
+
+
+}

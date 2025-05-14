@@ -124,7 +124,7 @@ class GenerateFilesCommand extends Command
 
             if ($confirmService) {
                 $generatedItems[] = $service;
-                Artisan::call('app:generate-service-file', [
+                Artisan::call('generate:service-file', [
                     'name' => $name,
                 ]);
             }
