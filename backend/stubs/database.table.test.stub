@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\DatabaseTableTestCase;
 
-class {{ class }}DatabaseTableTest extends DatabaseTablesTestCase
+class {{ class }}DatabaseTableTest extends DatabaseTableTestCase
 {
 
     protected function setUp(): void

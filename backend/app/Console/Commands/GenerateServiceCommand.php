@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 
-class GenerateServiceFile extends GeneratorCommand
+class GenerateServiceCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.

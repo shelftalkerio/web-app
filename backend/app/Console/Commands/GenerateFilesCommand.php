@@ -30,10 +30,10 @@ class GenerateFilesCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $generatedItems = [];
-        $name = Str::title(text('What is the name of the model?'));
+        $name = Str::title(text('What is the name of the file?'));
 
         $controller = "{$name}Controller";
         $model = $name;
@@ -45,9 +45,9 @@ class GenerateFilesCommand extends Command
         $service = "{$name}Service";
 
         $confirmController = confirm('Would you like a Controller?');
-        $optionsController = $confirmController ? multiselect('What options would you like with the Controller?', options: ['Resource', 'API']) : '';
+        $optionsController = $confirmController ? multiselect('What options would you like with the Controller?', options: ['Resource', 'API'], default: ['Resource']) : '';
         $confirmModel = confirm(label: 'Would you like a Model?');
-        $optionsModel = $confirmModel ? multiselect(label: 'What options would you like with the Model?', options: ['Migration', 'Factory', 'Policy'], hint: 'You can select more than 1.') : '';
+        $optionsModel = $confirmModel ? multiselect(label: 'What options would you like with the Model?', options: ['Migration', 'Factory', 'Policy'], default: ['Migration'], hint: 'You can select more than 1.') : '';
         $confirmTest = confirm('Would you like a Test?');
         $optionsTest = $confirmTest ? select(label: 'What type of test would you like?', options: ['Feature', 'Unit']) : '';
         $confirmService = confirm('Would you like a service file?');
