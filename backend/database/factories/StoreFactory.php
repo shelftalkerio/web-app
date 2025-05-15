@@ -23,8 +23,8 @@ class StoreFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'address' => fake()->word(),
-            'address_2' => fake()->word(),
+            'address' => fake()->address(),
+            'address_2' => fake()->streetAddress(),
             'city' => fake()->city(),
             'postcode' => fake()->postcode(),
             'phone' => fake()->phoneNumber(),

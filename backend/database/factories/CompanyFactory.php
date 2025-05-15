@@ -21,11 +21,12 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->create();
         return [
             'name' => fake()->name(),
-            'user_id' => User::factory(),
-            'email' => fake()->safeEmail(),
-            'website' => fake()->word(),
+            'user_id' => $user->id,
+            'email' => $user->email,
+            'website' => fake()->url(),
         ];
     }
 }

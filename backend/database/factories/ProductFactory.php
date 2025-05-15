@@ -21,11 +21,12 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $name = Str::title($this->faker->unique()->words(3, true));
         return [
-            'name' => fake()->name(),
-            'sku' => fake()->word(),
+            'name' => $name,
+            'sku' => Str::slug($name),
             'price' => fake()->randomFloat(2, 0, 999999.99),
-            'stock' => fake()->numberBetween(-10000, 10000),
+            'stock' => fake()->numberBetween(1, 100),
             'synced_at' => fake()->dateTime(),
             'description' => fake()->text(),
             'store_id' => Store::factory(),

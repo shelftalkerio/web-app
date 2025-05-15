@@ -3,9 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Module;
 use App\Models\Store;
+use App\Enums\ModuleType;
+use App\Enums\ModuleStatus;
+use Illuminate\Support\Arr;
 
 class ModuleFactory extends Factory
 {
@@ -22,13 +24,13 @@ class ModuleFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'description' => fake()->text(),
-            'type' => fake()->word(),
+            'name' => fake()->word(),
+            'description' => fake()->text(120),
+            'type' => Arr::random(ModuleType::cases())->value,
             'vendor' => fake()->word(),
             'config' => '{}',
             'active' => fake()->boolean(),
-            'status' => fake()->word(),
+            'status' =>  Arr::random(ModuleStatus::cases())->value,
             'last_synced_at' => fake()->dateTime(),
             'store_id' => Store::factory(),
         ];
