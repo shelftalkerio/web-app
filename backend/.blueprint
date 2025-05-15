@@ -1,0 +1,57 @@
+created:
+    - app/Http/Controllers/CompanyController.php
+    - app/Http/Controllers/StoreController.php
+    - app/Http/Controllers/ProductController.php
+    - app/Http/Controllers/ModuleController.php
+    - database/factories/CompanyFactory.php
+    - database/factories/StoreFactory.php
+    - database/factories/ProductFactory.php
+    - database/factories/ModuleFactory.php
+    - database/migrations/2025_05_15_085540_create_companies_table.php
+    - database/migrations/2025_05_15_085541_create_stores_table.php
+    - database/migrations/2025_05_15_085542_create_products_table.php
+    - database/migrations/2025_05_15_085543_create_modules_table.php
+    - app/Models/Company.php
+    - app/Models/Store.php
+    - app/Models/Product.php
+    - app/Models/Module.php
+    - database/seeders/CompanySeeder.php
+    - database/seeders/StoreSeeder.php
+    - database/seeders/ProductSeeder.php
+    - database/seeders/ModuleSeeder.php
+    - tests/Feature/Http/Controllers/CompanyControllerTest.php
+    - tests/Feature/Http/Controllers/StoreControllerTest.php
+    - tests/Feature/Http/Controllers/ProductControllerTest.php
+    - tests/Feature/Http/Controllers/ModuleControllerTest.php
+    - app/Http/Requests/CompanyStoreRequest.php
+    - app/Http/Requests/CompanyUpdateRequest.php
+    - app/Http/Requests/StoreStoreRequest.php
+    - app/Http/Requests/StoreUpdateRequest.php
+    - app/Http/Requests/ProductStoreRequest.php
+    - app/Http/Requests/ProductUpdateRequest.php
+    - app/Http/Requests/ModuleStoreRequest.php
+    - app/Http/Requests/ModuleUpdateRequest.php
+    - resources/views/company/index.blade.php
+    - resources/views/company/create.blade.php
+    - resources/views/company/show.blade.php
+    - resources/views/company/edit.blade.php
+    - resources/views/store/index.blade.php
+    - resources/views/store/create.blade.php
+    - resources/views/store/show.blade.php
+    - resources/views/store/edit.blade.php
+    - resources/views/product/index.blade.php
+    - resources/views/product/create.blade.php
+    - resources/views/product/show.blade.php
+    - resources/views/product/edit.blade.php
+    - resources/views/module/index.blade.php
+    - resources/views/module/create.blade.php
+    - resources/views/module/show.blade.php
+    - resources/views/module/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    Company: { name: string, user_id: 'id foreign', email: 'string nullable', website: 'string nullable', relationships: { belongsTo: User, hasMany: Store } }
+    Store: { name: string, address: string, address_2: 'string nullable', city: string, postcode: string, phone: 'string nullable', company_id: 'id foreign', relationships: { hasMany: Product, belongsTo: Company } }
+    Product: { name: string, sku: string, price: 'decimal:8,2', stock: integer, synced_at: datetime, description: 'text nullable', store_id: 'id foreign', relationships: { belongsTo: Store } }
+    Module: { name: string, description: 'text nullable', type: string, vendor: string, config: json, active: boolean, status: string, last_synced_at: datetime, store_id: 'id foreign', relationships: { belongsTo: Store } }

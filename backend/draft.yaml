@@ -1,0 +1,60 @@
+models:
+  Company:
+    name: string
+    user_id: id foreign
+    email: string nullable
+    website: string nullable
+    relationships:
+      belongsTo: User
+      hasMany: Store
+
+  Store:
+    name: string
+    address: string
+    address_2: string nullable
+    city: string
+    postcode: string
+    phone: string nullable
+    company_id: id foreign
+    relationships:
+      hasMany: Product
+      belongsTo: Company
+
+  Product:
+    name: string
+    sku: string
+    price: decimal:8,2
+    stock: integer
+    synced_at: datetime
+    description: text nullable
+    store_id: id foreign
+    relationships:
+      belongsTo: Store
+
+  Module:
+    name: string
+    description: text nullable
+    type: string
+    vendor: string
+    config: json
+    active: boolean
+    status: string
+    last_synced_at: datetime
+    store_id: id foreign
+    relationships:
+      belongsTo: Store
+
+seeders: Company, Store, Product, Module
+
+controllers:
+  Company:
+    resource
+
+  Store:
+    resource
+
+  Product:
+    resource
+
+  Module:
+    resource
