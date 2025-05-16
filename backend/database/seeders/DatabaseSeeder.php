@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Enums\UserRole;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,10 +20,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Dipo George',
             'email' => 'dipo@shelftalker.io',
+            'role' => UserRole::SuperAdmin->value
         ]);
         User::factory()->create([
             'name' => 'Jak Clark',
             'email' => 'jak@shelftalker.io',
+            'role' => UserRole::SuperAdmin->value
         ]);
         $this->call(CompanySeeder::class);
         $this->call(StoreSeeder::class);

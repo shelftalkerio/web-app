@@ -17,6 +17,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Pages\Auth\Register;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -27,6 +28,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('/')
             ->login()
+            ->registration(Register::class)
             ->colors([
                 'primary' => Color::Blue,
                 'gray' => Color::Slate,
