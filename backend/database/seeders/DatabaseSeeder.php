@@ -20,12 +20,14 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Dipo George',
             'email' => 'dipo@shelftalker.io',
-            'role' => UserRole::SuperAdmin->value
+            'role' => UserRole::SuperAdmin->value,
+            'approved'=> 1
         ]);
         User::factory()->create([
             'name' => 'Jak Clark',
             'email' => 'jak@shelftalker.io',
-            'role' => UserRole::SuperAdmin->value
+            'role' => UserRole::SuperAdmin->value,
+            'approved'=> 1
         ]);
         $this->call(CompanySeeder::class);
         $this->call(StoreSeeder::class);

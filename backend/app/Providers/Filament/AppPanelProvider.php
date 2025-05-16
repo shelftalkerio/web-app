@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\Auth\Register;
+use App\Http\Middleware\ApprovedUserLogin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -56,6 +57,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                ApprovedUserLogin::class,
             ]);
     }
 }
