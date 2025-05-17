@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory
 {
@@ -22,6 +21,7 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         $user = User::factory()->create();
+
         return [
             'name' => fake()->name(),
             'user_id' => $user->id,

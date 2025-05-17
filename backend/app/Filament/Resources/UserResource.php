@@ -32,7 +32,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required(fn ($context) => $context === 'create')
-                    ->dehydrateStateUsing(fn ($state) => !empty($state) ? bcrypt($state) : null)
+                    ->dehydrateStateUsing(fn ($state) => ! empty($state) ? bcrypt($state) : null)
                     ->dehydrated(fn ($state) => filled($state)),
             ]);
     }

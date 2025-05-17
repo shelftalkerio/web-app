@@ -6,7 +6,6 @@ use Tests\DatabaseTableTestCase;
 
 class CompanyDatabaseTableTest extends DatabaseTableTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();

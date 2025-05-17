@@ -6,7 +6,6 @@ use Tests\DatabaseTableTestCase;
 
 class ModuleDatabaseTableTest extends DatabaseTableTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();

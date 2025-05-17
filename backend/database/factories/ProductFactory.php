@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\Store;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -22,6 +22,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $name = Str::title($this->faker->unique()->words(3, true));
+
         return [
             'name' => $name,
             'sku' => Str::slug($name),

@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Enums\ModuleStatus;
+use App\Enums\ModuleType;
 use App\Models\Module;
 use App\Models\Store;
-use App\Enums\ModuleType;
-use App\Enums\ModuleStatus;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
 class ModuleFactory extends Factory
@@ -30,7 +30,7 @@ class ModuleFactory extends Factory
             'vendor' => fake()->word(),
             'config' => '{}',
             'active' => fake()->boolean(),
-            'status' =>  Arr::random(ModuleStatus::cases())->value,
+            'status' => Arr::random(ModuleStatus::cases())->value,
             'last_synced_at' => fake()->dateTime(),
             'store_id' => Store::factory(),
         ];

@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Registered;
 use App\Jobs\SendUserApprovalEmail;
+use Illuminate\Auth\Events\Registered;
 
 class NotifyAdminsOfNewUser
 {
@@ -11,8 +11,8 @@ class NotifyAdminsOfNewUser
     {
         $data = [
             'user' => $event->user->name,
-            'email' =>  $event->user->email,
-            'url' =>  url('/')
+            'email' => $event->user->email,
+            'url' => url('/'),
         ];
         SendUserApprovalEmail::dispatch($data);
     }

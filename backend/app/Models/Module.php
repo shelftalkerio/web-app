@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Module extends Model
 {
     use HasFactory, SoftDeletes;
+
     /**
      * Get the attributes that should be cast.
      *

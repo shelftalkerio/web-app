@@ -2,16 +2,16 @@
 
 namespace App\Filament\Pages\Auth;
 
-use Filament\Pages\Auth\Register as BaseRegister;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Component;
 use App\Enums\UserRole;
-use App\Models\User;
 use App\Models\Company;
-use Illuminate\Support\Facades\Redirect;
-use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
+use App\Models\User;
 use Filament\Facades\Filament;
+use Filament\Forms\Components\Component;
+use Filament\Forms\Components\Select;
+use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
+use Filament\Pages\Auth\Register as BaseRegister;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Redirect;
 
 class Register extends BaseRegister
 {
@@ -54,9 +54,9 @@ class Register extends BaseRegister
             ->label('Company')
             ->options(
                 Company::query()
-                ->orderBy('name')
-                ->pluck('name', 'id')
-                ->toArray()
+                    ->orderBy('name')
+                    ->pluck('name', 'id')
+                    ->toArray()
             )
             ->searchable()
             ->required();

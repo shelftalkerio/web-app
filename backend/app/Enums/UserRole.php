@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
 
-enum UserRole: string implements HasLabel, HasColor, HasIcon
+enum UserRole: string implements HasColor, HasIcon, HasLabel
 {
     case SuperAdmin = 'super_admin';
     case Admin = 'admin';
@@ -24,7 +24,7 @@ enum UserRole: string implements HasLabel, HasColor, HasIcon
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::SuperAdmin => 'success',

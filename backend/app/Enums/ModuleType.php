@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
 
-enum ModuleType: string implements HasLabel, HasColor, HasIcon
+enum ModuleType: string implements HasColor, HasIcon, HasLabel
 {
     case Epos = 'epos';
     case Esl = 'esl';
@@ -27,7 +27,7 @@ enum ModuleType: string implements HasLabel, HasColor, HasIcon
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Epos => 'info',

@@ -3,14 +3,14 @@
 namespace App\Jobs;
 
 use App\Enums\UserRole;
+use App\Mail\UserApprovalMail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable; // ✅ Required for dispatch()
+use Illuminate\Contracts\Queue\ShouldQueue; // ✅ Required for dispatch()
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\UserApprovalMail;
 
 class SendUserApprovalEmail implements ShouldQueue
 {
@@ -28,7 +28,7 @@ class SendUserApprovalEmail implements ShouldQueue
         // Send approval request email to all admins
         $admins = User::where('role', UserRole::SuperAdmin)->get()->unique('id');
 
-//        dd($admins);
+        //        dd($admins);
 
         foreach ($admins as $admin) {
             \Log::info($admin);
