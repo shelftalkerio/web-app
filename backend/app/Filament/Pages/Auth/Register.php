@@ -11,18 +11,19 @@ use App\Models\Company;
 use Illuminate\Support\Facades\Redirect;
 use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Facades\Filament;
+use Illuminate\Auth\Events\Registered;
 
 class Register extends BaseRegister
 {
     public function register(): ?RegistrationResponse
     {
         $this->validate();
-
         $data = $this->data;
-
         unset($data['passwordConfirmation']);
 
-        User::create($data);
+        $user = User::create($data);
+
+        event(new Registered($user));
 
         Redirect::to(Filament::getLoginUrl());
 

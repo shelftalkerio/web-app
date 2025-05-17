@@ -52,6 +52,8 @@ const containerNames = [
   `mailtrap_${site}`,
   `playwright_${site}`,
   `playwright_headed_${site}`,
+  `horizon_${site}`,
+
 ];
 
 checkAllContainers(containerNames).then();

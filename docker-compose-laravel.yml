@@ -68,7 +68,6 @@ services:
     entrypoint: ["php", "/var/www/html/backend/artisan"]
     networks:
       - app
-
   crontab:    
     build:
       context: ./cron
@@ -78,7 +77,6 @@ services:
       - ./backend:/var/www/html/backend
     networks:
       - app
-
   phpunit:
     profiles: ["test"]
     build:
@@ -91,6 +89,16 @@ services:
     entrypoint: "vendor/bin/phpunit"
     networks:
       - app
-
+  horizon:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: horizon_${SITE}
+    volumes:
+      - ./backend:/var/www/html/backend
+    working_dir: /var/www/html/backend
+    entrypoint: [ "php", "/var/www/html/backend/artisan", "horizon" ]
+    networks:
+      - app
 networks:
   app:
