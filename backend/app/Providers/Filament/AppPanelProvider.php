@@ -19,7 +19,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Pages\Auth\Register;
 use App\Http\Middleware\ApprovedUserLogin;
-
+use Filament\Enums\ThemeMode;
 class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -30,6 +30,7 @@ class AppPanelProvider extends PanelProvider
             ->path('/')
             ->login()
             ->registration(Register::class)
+            ->defaultThemeMode(ThemeMode::Light)
             ->colors([
                 'primary' => Color::Blue,
                 'gray' => Color::Slate,
